@@ -3,6 +3,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { GameConfig } from '@/types/game';
+import { useTheme } from '@/hooks/useTheme';
+import { Moon, Sun } from 'lucide-react';
 
 interface GameSetupProps {
   onStartGame: (config: GameConfig) => void;
@@ -14,6 +16,7 @@ export function GameSetup({ onStartGame }: GameSetupProps) {
   const [startingScore, setStartingScore] = useState(501);
   const [player1Name, setPlayer1Name] = useState('');
   const [player2Name, setPlayer2Name] = useState('');
+  const { isDark, toggleTheme } = useTheme();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,11 +32,25 @@ export function GameSetup({ onStartGame }: GameSetupProps) {
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto">
-      <CardHeader>
-        <CardTitle>Game Setup</CardTitle>
-        <CardDescription>Configure your darts game settings</CardDescription>
-      </CardHeader>
+    <div className="w-full max-w-md mx-auto relative">
+      <Button
+        variant="outline"
+        size="icon"
+        onClick={toggleTheme}
+        className="absolute top-4 right-4"
+        title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+      >
+        {isDark ? (
+          <Sun className="h-5 w-5" />
+        ) : (
+          <Moon className="h-5 w-5" />
+        )}
+      </Button>
+      <Card className="w-full">
+        <CardHeader>
+          <CardTitle>Game Setup</CardTitle>
+          <CardDescription>Configure your darts game settings</CardDescription>
+        </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
@@ -125,5 +142,6 @@ export function GameSetup({ onStartGame }: GameSetupProps) {
         </form>
       </CardContent>
     </Card>
+    </div>
   );
 }

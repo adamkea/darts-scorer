@@ -6,6 +6,8 @@ import { PlayerScore } from './PlayerScore';
 import { ScoreInput } from './ScoreInput';
 import { TurnSummary } from './TurnSummary';
 import { GameState } from '@/types/game';
+import { useTheme } from '@/hooks/useTheme';
+import { Moon, Sun } from 'lucide-react';
 
 interface ScoreBoardProps {
   gameState: GameState;
@@ -17,6 +19,7 @@ interface ScoreBoardProps {
 export function ScoreBoard({ gameState, onScoreSubmit, onUndo, onReset }: ScoreBoardProps) {
   const activePlayerState = gameState.currentPlayer === 1 ? gameState.player1 : gameState.player2;
   const canUndo = activePlayerState.gameHistory.length > 0 && !gameState.gameWon;
+  const { isDark, toggleTheme } = useTheme();
 
   return (
     <div className="w-full max-w-6xl mx-auto space-y-6">
@@ -44,9 +47,23 @@ export function ScoreBoard({ gameState, onScoreSubmit, onUndo, onReset }: ScoreB
                 )}
               </div>
             </div>
-            <Button variant="outline" onClick={onReset}>
-              New Game
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={toggleTheme}
+                title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+              >
+                {isDark ? (
+                  <Sun className="h-5 w-5" />
+                ) : (
+                  <Moon className="h-5 w-5" />
+                )}
+              </Button>
+              <Button variant="outline" onClick={onReset}>
+                New Game
+              </Button>
+            </div>
           </div>
         </CardHeader>
       </Card>
