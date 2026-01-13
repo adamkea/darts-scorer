@@ -122,7 +122,6 @@ export function ScoreInput({ onScoreSubmit, onUndo, canUndo, currentDart, curren
     }
   };
 
-  const remainingDarts = 3 - currentDart + 1;
   const quickScores = batchMode ? threeDartScores : singleDartScores;
   const canToggleMode = currentDart === 1; // Only allow toggle at start of turn
 

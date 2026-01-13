@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { GameState, GameConfig, Player, ScoreEntry } from '@/types/game';
+import { GameState, GameConfig, ScoreEntry } from '@/types/game';
 
 const initialPlayerState = (startingScore: number) => ({
   currentScore: startingScore,

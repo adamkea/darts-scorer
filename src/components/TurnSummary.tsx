@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
 import { GameState } from '@/types/game';
 import { cn } from '@/lib/utils';
 
